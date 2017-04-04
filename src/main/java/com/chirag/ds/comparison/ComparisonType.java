@@ -2,8 +2,8 @@ package com.chirag.ds.comparison;
 
 
 /**
- * @author Chirag
  * This Enum class is used to specify various comparison types
+ * @author Chirag
  */
 public enum ComparisonType {
 
