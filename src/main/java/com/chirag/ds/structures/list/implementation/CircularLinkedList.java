@@ -1,15 +1,17 @@
-package com.chirag.ds.structures.list;
+package com.chirag.ds.structures.list.implementation;
+
+import java.util.Optional;
 
 import com.chirag.ds.comparison.ComparisonHelper;
 import com.chirag.ds.comparison.ComparisonType;
-import com.chirag.ds.structures.list.model.TwoWayNode;
+import com.chirag.ds.structures.list.List;
 
 /**
  * This class represents CircularLinkedList Data Structure.
  * @param <T> Type of Data object
  * @author Chirag
  */
-public class CircularLinkedList<T> {
+public class CircularLinkedList<T> implements List<T> {
 
 	private TwoWayNode<T> head;
 	
@@ -26,43 +28,32 @@ public class CircularLinkedList<T> {
 	 * @param obj Initial header object
 	 */
 	public CircularLinkedList(T obj) {
-		this.head = new TwoWayNode<T>(obj);
+		add(obj);
 	}
-	
-	/**
-	 * This method initializes a CircularLinkedList with passed node as header.<br/>
-	 * This method will change next and prev pointer of the node and will set them to header.
-	 * @param node Node obj to set as Header
-	 */
-	public CircularLinkedList(TwoWayNode<T> node) {
-		this.head = node;
-		this.head.setNext(head);
-		this.head.setPrev(head);
-	}
-	
 	
 	/**
 	 * @param obj Data obj to be added as Node
 	 * @return true/false status for add operation 
 	 */
-	public boolean add(T obj)
+	@Override
+	public Optional<T> add(T obj)
 	{
 		TwoWayNode<T> node = new TwoWayNode<T>(obj);
-		return add(node);
+		return Optional.ofNullable(add(node));
 	}
 	
 	/**
 	 * @param node Object to be added as Node
 	 * @return true/false status for add operation 
 	 */
-	public boolean add(TwoWayNode<T> node)
+	private T add(TwoWayNode<T> node)
 	{	
 		if(head==null)
 		{
 			head = node;
 			head.setNext(head);
 			head.setPrev(head);
-			return true;
+			return node.getData();
 		}
 		else
 		{
@@ -73,7 +64,7 @@ public class CircularLinkedList<T> {
 			node.setNext(head);
 			head.setPrev(node);
 			temp.setNext(node);
-			return true;
+			return node.getData();
 		}
 	}
 	
@@ -82,20 +73,11 @@ public class CircularLinkedList<T> {
 	 * @param obj Data obj to be removed from list
 	 * @return true/false status for remove operation 
 	 */
-	public boolean remove(T obj)
+	@Override
+	public Optional<T> remove(T obj)
 	{
 		TwoWayNode<T> node = new TwoWayNode<T>(obj);
-		return remove(node, ComparisonType.DATA);
-	}
-	
-	/**
-	 * This method is used to remove node from list
-	 * @param node Node to be removed from list
-	 * @return true/false status for remove operation 
-	 */
-	public boolean remove(TwoWayNode<T> node)
-	{	
-		return remove(node, ComparisonType.NODE);
+		return Optional.ofNullable(remove(node, ComparisonType.DATA));
 	}
 	
 	/**
@@ -104,10 +86,10 @@ public class CircularLinkedList<T> {
 	 * @param comType Value to indicate how comparison need to be done
 	 * @return true/false status for remove operation
 	 */
-	private boolean remove(TwoWayNode<T> node, ComparisonType comType)
+	private T remove(TwoWayNode<T> node, ComparisonType comType)
 	{
 		if(head==null)
-			return false;
+			return null;
 		else if(ComparisonHelper.compare(head, node, comType))
 		{
 			if(head.getNext()==head && head.getPrev()==head)
@@ -118,8 +100,8 @@ public class CircularLinkedList<T> {
 				head.getPrev().setNext(head.getNext());
 				head = head.getNext();
 			}
-			
-			return true;
+
+			return node.getData();
 		}
 		else
 		{
@@ -131,16 +113,14 @@ public class CircularLinkedList<T> {
 					TwoWayNode<T> foundNode = temp.getNext();
 					temp.setNext(foundNode.getNext());
 					foundNode.getNext().setPrev(temp);
-					return true;
+					return node.getData();
 				}
 				else
 					temp = temp.getNext();
 			}
 			
-			return false;
+			return null;
 		}
-		
-		
 	}
 	
 	
@@ -149,20 +129,11 @@ public class CircularLinkedList<T> {
 	 * @param obj Data obj to be removed from list
 	 * @return true/false status for existence status 
 	 */
+	@Override
 	public boolean contains(T obj)
 	{
 		TwoWayNode<T> node = new TwoWayNode<T>(obj);
 		return contains(node, ComparisonType.DATA);
-	}
-	
-	/**
-	 * This method is used to verify that list contains passed Node
-	 * @param node Node to be verify against list
-	 * @return true/false status for existence status 
-	 */
-	public boolean contains(TwoWayNode<T> node)
-	{	
-		return contains(node, ComparisonType.NODE);
 	}
 	
 	/**

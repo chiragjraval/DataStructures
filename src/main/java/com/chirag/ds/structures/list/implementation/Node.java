@@ -1,4 +1,4 @@
-package com.chirag.ds.structures.list.model;
+package com.chirag.ds.structures.list.implementation;
 
 import com.chirag.ds.model.BaseNode;
 
@@ -7,7 +7,7 @@ import com.chirag.ds.model.BaseNode;
  * @param <T> Type of object contained by Node
  * @author Chirag 
  */
-public class Node<T> extends BaseNode<T> {
+class Node<T> extends BaseNode<T> {
 
 	private Node<T> next;
 	
@@ -15,7 +15,7 @@ public class Node<T> extends BaseNode<T> {
 	 * Default Constructor
 	 * @param data Data object for Node
 	 */
-	public Node() {
+	protected Node() {
 		super();
 		this.data = null;
 		this.next = null;
@@ -25,7 +25,7 @@ public class Node<T> extends BaseNode<T> {
 	 * Constructor with null next node
 	 * @param data Data object for Node
 	 */
-	public Node(T data) {
+	protected Node(T data) {
 		super();
 		this.data = data;
 		this.next = null;
@@ -36,7 +36,7 @@ public class Node<T> extends BaseNode<T> {
 	 * @param data Data object for Node
 	 * @param next Pointer to next Node
 	 */
-	public Node(T data, Node<T> next) {
+	protected Node(T data, Node<T> next) {
 		super();
 		this.data = data;
 		this.next = next;

@@ -1,4 +1,4 @@
-package com.chirag.ds.structures.list.model;
+package com.chirag.ds.structures.list.implementation;
 
 import com.chirag.ds.model.BaseNode;
 
@@ -7,7 +7,7 @@ import com.chirag.ds.model.BaseNode;
  * @param <T> Type of object contained by Node
  * @author Chirag 
  */
-public class TwoWayNode<T> extends BaseNode<T> {
+class TwoWayNode<T> extends BaseNode<T> {
 
 	private TwoWayNode<T> prev;
 	private TwoWayNode<T> next;
@@ -16,7 +16,7 @@ public class TwoWayNode<T> extends BaseNode<T> {
 	 * Default Constructor
 	 * @param data Data object for Node
 	 */
-	public TwoWayNode() {
+	protected TwoWayNode() {
 		super();
 		this.data = null;
 		this.next = null;
@@ -27,7 +27,7 @@ public class TwoWayNode<T> extends BaseNode<T> {
 	 * Constructor with null next node
 	 * @param data Data object for Node
 	 */
-	public TwoWayNode(T data) {
+	protected TwoWayNode(T data) {
 		super();
 		this.data = data;
 		this.next = null;
@@ -40,7 +40,7 @@ public class TwoWayNode<T> extends BaseNode<T> {
 	 * @param next Pointer to next Node
 	 * @param prev Pointer to previous Node
 	 */
-	public TwoWayNode(T data, TwoWayNode<T> next, TwoWayNode<T> prev) {
+	protected TwoWayNode(T data, TwoWayNode<T> next, TwoWayNode<T> prev) {
 		super();
 		this.data = data;
 		this.next = next;

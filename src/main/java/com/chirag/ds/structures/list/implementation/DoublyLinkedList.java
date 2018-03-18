@@ -1,15 +1,17 @@
-package com.chirag.ds.structures.list;
+package com.chirag.ds.structures.list.implementation;
+
+import java.util.Optional;
 
 import com.chirag.ds.comparison.ComparisonHelper;
 import com.chirag.ds.comparison.ComparisonType;
-import com.chirag.ds.structures.list.model.TwoWayNode;
+import com.chirag.ds.structures.list.List;
 
 /**
  * This class represents DoublyLinkedList Data Structure.
  * @param <T> Type of Data object
  * @author Chirag
  */
-public class DoublyLinkedList<T> {
+public class DoublyLinkedList<T> implements List<T> {
 
 	private TwoWayNode<T> head;
 	
@@ -26,41 +28,31 @@ public class DoublyLinkedList<T> {
 	 * @param obj Initial header object
 	 */
 	public DoublyLinkedList(T obj) {
-		this.head = new TwoWayNode<T>(obj);
-	}
-	
-	/**
-	 * This method initializes a DoublyLinkedList with passed node as header.<br/>
-	 * It will set prev pointer to null to create start of list. next pointer will be preserved.
-	 * @param node Node obj to set as Header
-	 */
-	public DoublyLinkedList(TwoWayNode<T> node) {
-		this.head = node;
-		this.head.setPrev(null);
-	}
-	
+		add(obj);
+	}	
 	
 	/**
 	 * @param obj Data obj to be added as Node
 	 * @return true/false status for add operation 
 	 */
-	public boolean add(T obj)
+	@Override
+	public Optional<T> add(T obj)
 	{
 		TwoWayNode<T> node = new TwoWayNode<T>(obj);
-		return add(node);
+		return Optional.ofNullable(add(node));
 	}
 	
 	/**
 	 * @param node Object to be added as Node
 	 * @return true/false status for add operation 
 	 */
-	public boolean add(TwoWayNode<T> node)
+	private T add(TwoWayNode<T> node)
 	{	
 		if(head==null)
 		{
 			head = node;
 			head.setPrev(null);
-			return true;
+			return node.getData();
 		}
 		else
 		{
@@ -68,7 +60,7 @@ public class DoublyLinkedList<T> {
 			while(temp.getNext()!=null) temp = temp.getNext();
 			temp.setNext(node);
 			node.setPrev(temp);
-			return true;
+			return node.getData();
 		}
 	}
 	
@@ -77,20 +69,11 @@ public class DoublyLinkedList<T> {
 	 * @param obj Data obj to be removed from list
 	 * @return true/false status for remove operation 
 	 */
-	public boolean remove(T obj)
+	@Override
+	public Optional<T> remove(T obj)
 	{
 		TwoWayNode<T> node = new TwoWayNode<T>(obj);
-		return remove(node, ComparisonType.DATA);
-	}
-	
-	/**
-	 * This method is used to remove node from list
-	 * @param node Node to be removed from list
-	 * @return true/false status for remove operation 
-	 */
-	public boolean remove(TwoWayNode<T> node)
-	{	
-		return remove(node, ComparisonType.NODE);
+		return Optional.ofNullable(remove(node, ComparisonType.DATA));
 	}
 	
 	/**
@@ -99,15 +82,15 @@ public class DoublyLinkedList<T> {
 	 * @param comType Value to indicate how comparison need to be done
 	 * @return true/false status for remove operation
 	 */
-	private boolean remove(TwoWayNode<T> node, ComparisonType comType)
+	private T remove(TwoWayNode<T> node, ComparisonType comType)
 	{
 		if(head==null)
-			return false;
+			return null;
 		else if(ComparisonHelper.compare(head, node, comType))
 		{
 			head = head.getNext();
 			head.setPrev(null);
-			return true;
+			return node.getData();
 		}
 		else
 		{
@@ -118,16 +101,14 @@ public class DoublyLinkedList<T> {
 				{
 					temp.setNext(temp.getNext().getNext());
 					if(temp.getNext()!=null) temp.getNext().setPrev(temp);
-					return true;
+					return node.getData();
 				}
 				else
 					temp = temp.getNext();
 			}
 			
-			return false;
+			return null;
 		}
-		
-		
 	}
 	
 	
@@ -136,20 +117,11 @@ public class DoublyLinkedList<T> {
 	 * @param obj Data obj to be removed from list
 	 * @return true/false status for existence status 
 	 */
+	@Override
 	public boolean contains(T obj)
 	{
 		TwoWayNode<T> node = new TwoWayNode<T>(obj);
 		return contains(node, ComparisonType.DATA);
-	}
-	
-	/**
-	 * This method is used to verify that list contains passed Node
-	 * @param node Node to be verify against list
-	 * @return true/false status for existence status 
-	 */
-	public boolean contains(TwoWayNode<T> node)
-	{	
-		return contains(node, ComparisonType.NODE);
 	}
 	
 	/**

@@ -1,15 +1,17 @@
-package com.chirag.ds.structures.list;
+package com.chirag.ds.structures.list.implementation;
+
+import java.util.Optional;
 
 import com.chirag.ds.comparison.ComparisonHelper;
 import com.chirag.ds.comparison.ComparisonType;
-import com.chirag.ds.structures.list.model.Node;
+import com.chirag.ds.structures.list.List;
 
 /**
  * This class represents LinkedList Data Structure.
  * @param <T> Type of Data object
  * @author Chirag
  */
-public class LinkedList<T> {
+public class LinkedList<T> implements List<T> {
 
 	private Node<T> head;
 	
@@ -26,45 +28,37 @@ public class LinkedList<T> {
 	 * @param obj Initial header object
 	 */
 	public LinkedList(T obj) {
-		this.head = new Node<T>(obj);
+		add(obj);
 	}
-	
-	/**
-	 * This method initializes a LinkedList with passed node as header
-	 * @param node Node obj to set as Header
-	 */
-	public LinkedList(Node<T> node) {
-		this.head = node;
-	}
-	
 	
 	/**
 	 * @param obj Data obj to be added as Node
 	 * @return true/false status for add operation 
 	 */
-	public boolean add(T obj)
+	@Override
+	public Optional<T> add(T obj)
 	{
 		Node<T> node = new Node<T>(obj);
-		return add(node);
+		return Optional.of(add(node));
 	}
 	
 	/**
 	 * @param node Object to be added as Node
 	 * @return true/false status for add operation 
 	 */
-	public boolean add(Node<T> node)
+	private T add(Node<T> node)
 	{	
 		if(head==null)
 		{
 			head = node;
-			return true;
+			return node.getData();
 		}
 		else
 		{
 			Node<T> temp = head;
 			while(temp.getNext()!=null) temp = temp.getNext();
 			temp.setNext(node);
-			return true;
+			return node.getData();
 		}
 	}
 	
@@ -73,20 +67,11 @@ public class LinkedList<T> {
 	 * @param obj Data obj to be removed from list
 	 * @return true/false status for remove operation 
 	 */
-	public boolean remove(T obj)
+	@Override
+	public Optional<T> remove(T obj)
 	{
 		Node<T> node = new Node<T>(obj);
-		return remove(node, ComparisonType.DATA);
-	}
-	
-	/**
-	 * This method is used to remove node from list
-	 * @param node Node to be removed from list
-	 * @return true/false status for remove operation 
-	 */
-	public boolean remove(Node<T> node)
-	{	
-		return remove(node, ComparisonType.NODE);
+		return Optional.ofNullable(remove(node, ComparisonType.DATA));
 	}
 	
 	/**
@@ -95,14 +80,14 @@ public class LinkedList<T> {
 	 * @param comType Value to indicate how comparison need to be done
 	 * @return true/false status for remove operation
 	 */
-	private boolean remove(Node<T> node, ComparisonType comType)
+	private T remove(Node<T> node, ComparisonType comType)
 	{
 		if(head==null)
-			return false;
+			return null;
 		else if(ComparisonHelper.compare(head, node, comType))
 		{
 			head = head.getNext();
-			return true;
+			return node.getData();
 		}
 		else
 		{
@@ -112,14 +97,14 @@ public class LinkedList<T> {
 				if(ComparisonHelper.compare(temp.getNext(), node, comType))
 				{
 					temp.setNext(temp.getNext().getNext());
-					return true;
+					return node.getData();
 				}
 				else
 					temp = temp.getNext();
 			}
 		}
 		
-		return false;
+		return null;
 	}
 	
 	
@@ -128,20 +113,11 @@ public class LinkedList<T> {
 	 * @param obj Data obj to be removed from list
 	 * @return true/false status for existence status 
 	 */
+	@Override
 	public boolean contains(T obj)
 	{
 		Node<T> node = new Node<T>(obj);
 		return contains(node, ComparisonType.DATA);
-	}
-	
-	/**
-	 * This method is used to verify that list contains passed Node
-	 * @param node Node to be verify against list
-	 * @return true/false status for existence status 
-	 */
-	public boolean contains(Node<T> node)
-	{	
-		return contains(node, ComparisonType.NODE);
 	}
 	
 	/**
