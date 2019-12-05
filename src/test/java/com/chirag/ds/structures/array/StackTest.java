@@ -19,7 +19,6 @@ public class StackTest {
 		} catch(StackFullException ex) {
 			ex.printStackTrace();
 		} catch (StackEmptyException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
