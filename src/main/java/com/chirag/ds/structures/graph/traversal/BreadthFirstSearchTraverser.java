@@ -31,7 +31,7 @@ public class BreadthFirstSearchTraverser<E> implements GraphTraverser<E> {
 
 	public boolean hasNext() {
 		while (!processingQueue.isEmpty() && visitedNodes.get(processingQueue.peek())) {
-			processingQueue.poll();
+			processingQueue.remove();
 		}
 		return !processingQueue.isEmpty();
 	}
@@ -40,7 +40,7 @@ public class BreadthFirstSearchTraverser<E> implements GraphTraverser<E> {
 		if (!hasNext()) {
 			return null;
 		} else {
-			GraphNode<E> nextNode = processingQueue.poll();
+			GraphNode<E> nextNode = processingQueue.remove();
 			visitedNodes.put(nextNode, true);
 			graph.getAdjacentNodes(nextNode).stream().filter(adjacentNode -> !visitedNodes.get(adjacentNode))
 					.forEach(adjacentNode -> processingQueue.add(adjacentNode));

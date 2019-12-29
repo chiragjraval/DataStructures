@@ -4,7 +4,7 @@ package com.chirag.ds.exceptions;
  * This class represents exception which occurs when Stack is empty and we try to get Data from it
  * @author Chirag 
  */
-public class QueueEmptyException extends Exception {
+public class QueueEmptyException extends RuntimeException {
 
 	/**
 	 * Default Serial Version ID

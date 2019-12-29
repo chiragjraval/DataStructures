@@ -4,7 +4,7 @@ package com.chirag.ds.exceptions;
  * This class represents exception which occurs when Stack is full and we try to add Data to it
  * @author Chirag 
  */
-public class QueueFullException extends Exception {
+public class QueueFullException extends RuntimeException {
 
 	/**
 	 * Default Serial Version ID
