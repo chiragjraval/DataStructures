@@ -1,11 +1,11 @@
-package com.chirag.ds.array;
+package com.chirag.ds.queue;
 
 import org.junit.Assert;
 import org.junit.Test;
 
-import com.chirag.ds.array.Queue;
 import com.chirag.ds.exceptions.QueueEmptyException;
 import com.chirag.ds.exceptions.QueueFullException;
+import com.chirag.ds.queue.Queue;
 
 public class QueueTest {
 	

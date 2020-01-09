@@ -5,10 +5,10 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 
-import com.chirag.ds.array.Stack;
 import com.chirag.ds.graph.Graph;
 import com.chirag.ds.graph.GraphNode;
 import com.chirag.ds.model.BaseNode;
+import com.chirag.ds.stack.Stack;
 
 public class DepthFirstSearchTraverser<E> implements GraphTraverser<E> {
 

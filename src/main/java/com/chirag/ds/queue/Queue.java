@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.chirag.ds.array;
+package com.chirag.ds.queue;
 
 import java.util.Arrays;
 

@@ -1,4 +1,4 @@
-package com.chirag.ds.array;
+package com.chirag.ds.stack;
 
 import java.util.Arrays;
 
