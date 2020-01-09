@@ -1,10 +1,11 @@
-package com.chirag.ds.structures.heap;
+package com.chirag.ds.heap;
 
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.chirag.ds.structures.heap.implementation.MinArrayHeap;
+import com.chirag.ds.heap.Heap;
+import com.chirag.ds.heap.impl.MinArrayHeap;
 
 public class MinArrayHeapTest {
 

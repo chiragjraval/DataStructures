@@ -1,12 +1,13 @@
-package com.chirag.ds.structures.graph.traversal;
+package com.chirag.ds.graph.traversal;
 
 import org.junit.Assert;
 import org.junit.Test;
 
-import com.chirag.ds.structures.graph.Graph;
-import com.chirag.ds.structures.graph.GraphNode;
-import com.chirag.ds.structures.graph.impl.DirectedGraph;
-import com.chirag.ds.structures.graph.impl.UndirectedGraph;
+import com.chirag.ds.graph.Graph;
+import com.chirag.ds.graph.GraphNode;
+import com.chirag.ds.graph.impl.DirectedGraph;
+import com.chirag.ds.graph.impl.UndirectedGraph;
+import com.chirag.ds.graph.traversal.DepthFirstSearchTraverser;
 
 public class DepthFirstSearchTraverserTest {
 

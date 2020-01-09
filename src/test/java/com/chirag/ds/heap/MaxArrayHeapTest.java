@@ -1,4 +1,4 @@
-package com.chirag.ds.structures.heap;
+package com.chirag.ds.heap;
 
 import java.util.Arrays;
 import java.util.List;
@@ -9,7 +9,8 @@ import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
-import com.chirag.ds.structures.heap.implementation.MaxArrayHeap;
+import com.chirag.ds.heap.Heap;
+import com.chirag.ds.heap.impl.MaxArrayHeap;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class MaxArrayHeapTest {

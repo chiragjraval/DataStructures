@@ -1,11 +1,11 @@
-package com.chirag.ds.structures.array;
+package com.chirag.ds.array;
 
 import org.junit.Assert;
 import org.junit.Test;
 
+import com.chirag.ds.array.Stack;
 import com.chirag.ds.exceptions.StackEmptyException;
 import com.chirag.ds.exceptions.StackFullException;
-import com.chirag.ds.structures.array.Stack;
 
 public class StackTest {
 

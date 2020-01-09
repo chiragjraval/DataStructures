@@ -1,4 +1,4 @@
-package com.chirag.ds.structures.tree;
+package com.chirag.ds.tree;
 
 import java.util.Arrays;
 import java.util.List;
@@ -8,7 +8,8 @@ import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
-import com.chirag.ds.structures.tree.implementation.BinarySearchTree;
+import com.chirag.ds.tree.Tree;
+import com.chirag.ds.tree.impl.BinarySearchTree;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class BinarySearchTreeTest {

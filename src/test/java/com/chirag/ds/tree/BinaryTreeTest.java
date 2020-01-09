@@ -1,4 +1,4 @@
-package com.chirag.ds.structures.tree;
+package com.chirag.ds.tree;
 
 import java.util.Arrays;
 import java.util.List;
@@ -7,7 +7,8 @@ import java.util.stream.Collectors;
 import org.junit.Assert;
 import org.junit.Test;
 
-import com.chirag.ds.structures.tree.implementation.BinaryTree;
+import com.chirag.ds.tree.Tree;
+import com.chirag.ds.tree.impl.BinaryTree;
 
 public class BinaryTreeTest {
 

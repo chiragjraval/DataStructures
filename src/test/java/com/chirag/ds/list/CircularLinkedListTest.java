@@ -1,9 +1,10 @@
-package com.chirag.ds.structures.list;
+package com.chirag.ds.list;
 
 import org.junit.Assert;
 import org.junit.Test;
 
-import com.chirag.ds.structures.list.implementation.CircularLinkedList;
+import com.chirag.ds.list.List;
+import com.chirag.ds.list.impl.CircularLinkedList;
 
 public class CircularLinkedListTest {
 	@Test
