@@ -6,15 +6,15 @@ import java.util.ListIterator;
 import java.util.Objects;
 import java.util.Optional;
 
-import com.chirag.ds.tree.Tree;
+import com.chirag.ds.tree.BinaryTree;
 import com.chirag.ds.util.ListUtil;
 
-abstract class AbstractTree<T> implements Tree<T> {
+abstract class AbstractBinaryTree<T> implements BinaryTree<T> {
 
-	protected TreeNode<T> root;
+	protected BinaryTreeNode<T> root;
 	
-	public TreeNode<T> getRoot() {
-		return this.root;
+	public Optional<T> getRoot() {
+		return Optional.ofNullable(root.getData());
 	}
 	
 	class BooleanRef
@@ -37,14 +37,14 @@ abstract class AbstractTree<T> implements Tree<T> {
 		}
 	}
 	
-	protected void setEdgeNull(TreeNode<T> node, EdgeType edgeType) {
+	protected void setEdgeNull(BinaryTreeNode<T> node, EdgeType edgeType) {
 		if(EdgeType.LEFT.equals(edgeType))
 			node.setLeft(null);
 		else if(EdgeType.RIGHT.equals(edgeType))
 			node.setRight(null);
 	}
 	
-	protected void setChild(TreeNode<T> node, TreeNode<T> child, EdgeType edgeType) {
+	protected void setChild(BinaryTreeNode<T> node, BinaryTreeNode<T> child, EdgeType edgeType) {
 		if(EdgeType.LEFT.equals(edgeType))
 			node.setLeft(child);
 		else if(EdgeType.RIGHT.equals(edgeType))
@@ -54,7 +54,7 @@ abstract class AbstractTree<T> implements Tree<T> {
 		child.setParentNodeEdge(edgeType);
 	}
 	
-	protected int findLevel(TreeNode<T> root, TreeNode<T> node, int level)
+	protected int findLevel(BinaryTreeNode<T> root, BinaryTreeNode<T> node, int level)
 	{
 		if(root==null)
 			return -1;
@@ -66,11 +66,11 @@ abstract class AbstractTree<T> implements Tree<T> {
 		return d!=-1 ? d : findLevel(root.getRight(), node, level+1);
 	}
 	
-	protected Optional<TreeNode<T>> findNode(T value) {
+	protected Optional<BinaryTreeNode<T>> findNode(T value) {
 		if(Objects.nonNull(value) && Objects.nonNull(this.root)) {
-			ListIterator<TreeNode<T>> queueIterator = ListUtil.getListIterator(this.root);
+			ListIterator<BinaryTreeNode<T>> queueIterator = ListUtil.getListIterator(this.root);
 			while (queueIterator.hasNext()) {
-				TreeNode<T> temp = queueIterator.next();
+				BinaryTreeNode<T> temp = queueIterator.next();
 				if(temp.getData().equals(value))
 					return Optional.of(temp);
 				ListUtil.addNonNullToListIterator(queueIterator, temp.getLeft(), temp.getRight());
@@ -79,11 +79,11 @@ abstract class AbstractTree<T> implements Tree<T> {
 		return Optional.empty();
 	}
 	
-	protected Optional<TreeNode<T>> findAnyLeafNode(TreeNode<T> node) {
+	protected Optional<BinaryTreeNode<T>> findAnyLeafNode(BinaryTreeNode<T> node) {
 		if(Objects.nonNull(node)) {
-			ListIterator<TreeNode<T>> queueIterator = ListUtil.getListIterator(node);
+			ListIterator<BinaryTreeNode<T>> queueIterator = ListUtil.getListIterator(node);
 			while (queueIterator.hasNext()) {
-				TreeNode<T> temp = queueIterator.next();
+				BinaryTreeNode<T> temp = queueIterator.next();
 				if(Objects.isNull(temp.getLeft()) && Objects.isNull(temp.getRight()))
 					return Optional.of(temp);
 				ListUtil.addNonNullToListIterator(queueIterator, temp.getLeft(), temp.getRight());
@@ -92,7 +92,7 @@ abstract class AbstractTree<T> implements Tree<T> {
 		return Optional.empty();
 	}
 	
-	protected boolean checkIfNodeExist(TreeNode<T> node, T data)
+	protected boolean checkIfNodeExist(BinaryTreeNode<T> node, T data)
 	{
 		if(node==null)
 			return false;
@@ -103,7 +103,7 @@ abstract class AbstractTree<T> implements Tree<T> {
 		return checkIfNodeExist(node.getLeft(), data) || checkIfNodeExist(node.getRight(), data);
 	}
 	
-	protected TreeNode<T> checkAndGetIfNodeExist(TreeNode<T> node, T data)
+	protected BinaryTreeNode<T> checkAndGetIfNodeExist(BinaryTreeNode<T> node, T data)
 	{
 		if(node==null)
 			return null;
@@ -111,7 +111,7 @@ abstract class AbstractTree<T> implements Tree<T> {
 		if(node.getData().equals(data))
 			return node;
 		
-		TreeNode<T> resultLeft = checkAndGetIfNodeExist(node.getLeft(), data);
+		BinaryTreeNode<T> resultLeft = checkAndGetIfNodeExist(node.getLeft(), data);
 		
 		return Objects.nonNull(resultLeft) ? resultLeft : checkAndGetIfNodeExist(node.getRight(), data); 
 	}
@@ -124,7 +124,7 @@ abstract class AbstractTree<T> implements Tree<T> {
 		return resultList;
 	}
 	
-	private void inOrderListUtil(TreeNode<T> node, List<T> resultList)
+	private void inOrderListUtil(BinaryTreeNode<T> node, List<T> resultList)
 	{
 		if(node==null)
 			return;
@@ -142,7 +142,7 @@ abstract class AbstractTree<T> implements Tree<T> {
 		return resultList;
 	}
 	
-	private void preOrderListUtil(TreeNode<T> node, List<T> resultList)
+	private void preOrderListUtil(BinaryTreeNode<T> node, List<T> resultList)
 	{
 		if(node==null)
 			return;
@@ -160,7 +160,7 @@ abstract class AbstractTree<T> implements Tree<T> {
 		return resultList;
 	}
 	
-	private void postOrderListUtil(TreeNode<T> node, List<T> resultList)
+	private void postOrderListUtil(BinaryTreeNode<T> node, List<T> resultList)
 	{
 		if(node==null)
 			return;
@@ -172,12 +172,12 @@ abstract class AbstractTree<T> implements Tree<T> {
 	
 	public boolean isBinarySearchTree()
 	{
-		TreeNode<T> prev=new TreeNode<T>();
+		BinaryTreeNode<T> prev=new BinaryTreeNode<T>();
 		return isBinarySearchTreeInOrderUtil(this.root, prev);
 	}
 	
 	@SuppressWarnings("unchecked")
-	private boolean isBinarySearchTreeInOrderUtil(TreeNode<T> node, TreeNode<T> prev)
+	private boolean isBinarySearchTreeInOrderUtil(BinaryTreeNode<T> node, BinaryTreeNode<T> prev)
 	{
 		if(node==null)
 			return true;
@@ -204,7 +204,7 @@ abstract class AbstractTree<T> implements Tree<T> {
 	{
 		BooleanRef v1 = new BooleanRef(false);
 		BooleanRef v2 = new BooleanRef(false);
-		TreeNode<T> lca = findLCAUtil(this.root, data1, data2, v1, v2);
+		BinaryTreeNode<T> lca = findLCAUtil(this.root, data1, data2, v1, v2);
 		
 		if( (v1.value && v2.value) 
 				|| (v1.value && checkIfNodeExist(lca, data2))
@@ -214,7 +214,7 @@ abstract class AbstractTree<T> implements Tree<T> {
 		return Optional.empty();
 	}
 	
-	private TreeNode<T> findLCAUtil(TreeNode<T> node, T data1, T data2, BooleanRef v1, BooleanRef v2)
+	private BinaryTreeNode<T> findLCAUtil(BinaryTreeNode<T> node, T data1, T data2, BooleanRef v1, BooleanRef v2)
 	{
 		if(node==null)
 			return null;
@@ -228,8 +228,8 @@ abstract class AbstractTree<T> implements Tree<T> {
 			return node;
 		}
 		
-		TreeNode<T> leftLca = findLCAUtil(node.getLeft(), data1, data2, v1, v2);
-		TreeNode<T> rigttLca = findLCAUtil(node.getRight(), data1, data2, v1, v2);
+		BinaryTreeNode<T> leftLca = findLCAUtil(node.getLeft(), data1, data2, v1, v2);
+		BinaryTreeNode<T> rigttLca = findLCAUtil(node.getRight(), data1, data2, v1, v2);
 		
 		if(leftLca!=null && rigttLca!=null)
 			return node;
@@ -240,8 +240,8 @@ abstract class AbstractTree<T> implements Tree<T> {
 	@Override
 	public int findShortestDistBetweenNodes(T data1, T data2)
 	{
-		TreeNode<T> node1 = checkAndGetIfNodeExist(this.root, data1);
-		TreeNode<T> node2 = checkAndGetIfNodeExist(this.root, data2);
+		BinaryTreeNode<T> node1 = checkAndGetIfNodeExist(this.root, data1);
+		BinaryTreeNode<T> node2 = checkAndGetIfNodeExist(this.root, data2);
 		
 		IntegerRef d1 = new IntegerRef(-1);
 		IntegerRef d2 = new IntegerRef(-1);
@@ -260,7 +260,7 @@ abstract class AbstractTree<T> implements Tree<T> {
 		return -1;
 	}
 	
-	private int findShortestDistBetweenNodesUtil(TreeNode<T> root, TreeNode<T> node1, TreeNode<T> node2, 
+	private int findShortestDistBetweenNodesUtil(BinaryTreeNode<T> root, BinaryTreeNode<T> node1, BinaryTreeNode<T> node2, 
 			IntegerRef d1, IntegerRef d2, int level)
 	{
 		if(root==null) {
@@ -296,7 +296,7 @@ abstract class AbstractTree<T> implements Tree<T> {
 			return findSumOfAllAtLevel(this.root, 1, level);
 	}
 	
-	private double findSumOfAllAtLevel(TreeNode<T> node, int curLevel, int keyLevel)
+	private double findSumOfAllAtLevel(BinaryTreeNode<T> node, int curLevel, int keyLevel)
 	{
 		if(node==null)
 			return 0;
@@ -321,7 +321,7 @@ abstract class AbstractTree<T> implements Tree<T> {
 		return findDiameterOfTreeUtil(this.root, maxHeight);
 	}
 	
-	private int findDiameterOfTreeUtil(TreeNode<T> node, IntegerRef maxHeight)
+	private int findDiameterOfTreeUtil(BinaryTreeNode<T> node, IntegerRef maxHeight)
 	{
 		IntegerRef lsMaxHeight = new IntegerRef(0), rsMaxHeight = new IntegerRef(0);
 		int lsDiameter = 0 , rsDiameter = 0;

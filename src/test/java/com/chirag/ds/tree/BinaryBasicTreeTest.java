@@ -7,10 +7,9 @@ import java.util.stream.Collectors;
 import org.junit.Assert;
 import org.junit.Test;
 
-import com.chirag.ds.tree.Tree;
-import com.chirag.ds.tree.impl.BinaryTree;
+import com.chirag.ds.tree.impl.BinaryBasicTree;
 
-public class BinaryTreeTest {
+public class BinaryBasicTreeTest {
 
 	private List<Integer> sortedList(List<Integer> origList) {
 		return origList.stream().sorted().collect(Collectors.toList());
@@ -18,7 +17,7 @@ public class BinaryTreeTest {
 	
 	@Test
 	public void insertTest() { 
-		Tree<Integer> tree = new BinaryTree<Integer>();
+		BinaryTree<Integer> tree = new BinaryBasicTree<Integer>();
 		List<Integer> inOrderList;
 		
 		tree.insert(10);
@@ -36,7 +35,7 @@ public class BinaryTreeTest {
 	
 	@Test
 	public void deleteTest() {
-		Tree<Integer> tree = new BinaryTree<Integer>();
+		BinaryTree<Integer> tree = new BinaryBasicTree<Integer>();
 		List<Integer> inOrderList;
 		
 		tree.insert(10);

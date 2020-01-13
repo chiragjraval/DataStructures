@@ -8,7 +8,6 @@ import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
-import com.chirag.ds.tree.Tree;
 import com.chirag.ds.tree.impl.BinarySearchTree;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
@@ -16,7 +15,7 @@ public class BinarySearchTreeTest {
 
 	@Test
 	public void insertTest() { 
-		Tree<Integer> tree = new BinarySearchTree<Integer>();
+		BinaryTree<Integer> tree = new BinarySearchTree<Integer>();
 		
 		tree.insert(10);
 		tree.insert(3);
@@ -31,7 +30,7 @@ public class BinarySearchTreeTest {
 	
 	@Test
 	public void deleteTest() {
-		Tree<Integer> tree = new BinarySearchTree<Integer>();
+		BinaryTree<Integer> tree = new BinarySearchTree<Integer>();
 		List<Integer> inOrderList;
 		
 		tree.insert(10);
@@ -54,7 +53,7 @@ public class BinarySearchTreeTest {
 	
 	@Test
 	public void inOrderListTest() {
-		Tree<Integer> tree = new BinarySearchTree<Integer>();
+		BinaryTree<Integer> tree = new BinarySearchTree<Integer>();
 		tree.insert(10);
 		tree.insert(3);
 		tree.insert(12);
@@ -67,7 +66,7 @@ public class BinarySearchTreeTest {
 	
 	@Test
 	public void preOrderListTest() {
-		Tree<Integer> tree = new BinarySearchTree<Integer>();
+		BinaryTree<Integer> tree = new BinarySearchTree<Integer>();
 		tree.insert(10);
 		tree.insert(3);
 		tree.insert(12);
@@ -80,7 +79,7 @@ public class BinarySearchTreeTest {
 	
 	@Test
 	public void postOrderListTest() {
-		Tree<Integer> tree = new BinarySearchTree<Integer>();
+		BinaryTree<Integer> tree = new BinarySearchTree<Integer>();
 		tree.insert(10);
 		tree.insert(3);
 		tree.insert(12);
@@ -93,7 +92,7 @@ public class BinarySearchTreeTest {
 	
 	@Test
 	public void isBinarySearchTreeTest() {
-		Tree<Integer> tree = new BinarySearchTree<Integer>();
+		BinaryTree<Integer> tree = new BinarySearchTree<Integer>();
 		tree.insert(10);
 		tree.insert(3);
 		tree.insert(12);
@@ -106,7 +105,7 @@ public class BinarySearchTreeTest {
 	
 	@Test
 	public void findDiameterOfTreeTest() {
-		Tree<Integer> tree = new BinarySearchTree<Integer>();
+		BinaryTree<Integer> tree = new BinarySearchTree<Integer>();
 		tree.insert(10);
 		tree.insert(3);
 		tree.insert(12);
@@ -119,7 +118,7 @@ public class BinarySearchTreeTest {
 	
 	@Test
 	public void findLcaTest() {
-		Tree<Integer> tree = new BinarySearchTree<Integer>();
+		BinaryTree<Integer> tree = new BinarySearchTree<Integer>();
 		tree.insert(10);
 		tree.insert(3);
 		tree.insert(12);
@@ -135,7 +134,7 @@ public class BinarySearchTreeTest {
 	
 	@Test
 	public void findShortestDistBetweenNodesTest() {
-		Tree<Integer> tree = new BinarySearchTree<Integer>();
+		BinaryTree<Integer> tree = new BinarySearchTree<Integer>();
 		tree.insert(10);
 		tree.insert(3);
 		tree.insert(12);
@@ -151,7 +150,7 @@ public class BinarySearchTreeTest {
 	
 	@Test
 	public void findSumOfAllAtLevelTest() {
-		Tree<Integer> tree = new BinarySearchTree<Integer>();
+		BinaryTree<Integer> tree = new BinarySearchTree<Integer>();
 		tree.insert(10);
 		tree.insert(3);
 		tree.insert(12);

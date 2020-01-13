@@ -3,15 +3,15 @@ package com.chirag.ds.tree.impl;
 import java.util.Objects;
 import java.util.Optional;
 
-public class BinarySearchTree<T extends Comparable<T>> extends AbstractTree<T> {
+public class BinarySearchTree<T extends Comparable<T>> extends AbstractBinaryTree<T> {
 
 	public BinarySearchTree() {
 		super();
 	}
 	
 	@Override
-	protected Optional<TreeNode<T>> findNode(T value) {
-		TreeNode<T> temp = this.root;
+	protected Optional<BinaryTreeNode<T>> findNode(T value) {
+		BinaryTreeNode<T> temp = this.root;
 		while(Objects.nonNull(temp)) {
 			if(temp.getData().compareTo(value)==0)
 				break;
@@ -23,7 +23,7 @@ public class BinarySearchTree<T extends Comparable<T>> extends AbstractTree<T> {
 		return Optional.ofNullable(temp);
 	}	
 	
-	protected TreeNode<T> findSmallestNode(TreeNode<T> node) {
+	protected BinaryTreeNode<T> findSmallestNode(BinaryTreeNode<T> node) {
 		while(Objects.nonNull(node.getLeft()))
 			node = node.getLeft();
 		return node;
@@ -31,9 +31,9 @@ public class BinarySearchTree<T extends Comparable<T>> extends AbstractTree<T> {
 	
 	@Override
 	public Optional<T> insert(T value) {
-		TreeNode<T> newNode = new TreeNode<T>(value);
-		TreeNode<T> node = this.root;
-		TreeNode<T> parent = null;
+		BinaryTreeNode<T> newNode = new BinaryTreeNode<T>(value);
+		BinaryTreeNode<T> node = this.root;
+		BinaryTreeNode<T> parent = null;
 		EdgeType parentNodeEdge = null;
 		
 		while(Objects.nonNull(node)) {
@@ -64,17 +64,17 @@ public class BinarySearchTree<T extends Comparable<T>> extends AbstractTree<T> {
 	
 	@Override
 	public Optional<T> delete(T value) {
-		Optional<TreeNode<T>> nodeOptional = findNode(value);
+		Optional<BinaryTreeNode<T>> nodeOptional = findNode(value);
 		if(nodeOptional.isPresent()) {
-			TreeNode<T> node = nodeOptional.get();
+			BinaryTreeNode<T> node = nodeOptional.get();
 			return Optional.of(delete(node));
 		}
 		return Optional.empty();
 	}
 	
-	private T delete(TreeNode<T> node) {
+	private T delete(BinaryTreeNode<T> node) {
 		T returnValue = node.getData();
-		TreeNode<T> parent = node.getParent();
+		BinaryTreeNode<T> parent = node.getParent();
 		EdgeType parentNodeEdge = node.getParentNodeEdge();
 		
 		if(Objects.isNull(node.getLeft()) && Objects.isNull(node.getRight())) {
@@ -82,20 +82,25 @@ public class BinarySearchTree<T extends Comparable<T>> extends AbstractTree<T> {
 			node.free();
 		}
 		else if(Objects.nonNull(node.getLeft()) && Objects.nonNull(node.getRight())) {
-			TreeNode<T> successor = findSmallestNode(node.getRight());
+			BinaryTreeNode<T> successor = findSmallestNode(node.getRight());
 			node.setData(successor.getData());
 			delete(successor);
 		}
 		else if(Objects.isNull(node.getLeft())) {
-			TreeNode<T> child = node.getRight();
+			BinaryTreeNode<T> child = node.getRight();
 			setChild(parent, child, parentNodeEdge);
 		}
 		else if(Objects.isNull(node.getRight())) {
-			TreeNode<T> child = node.getLeft();
+			BinaryTreeNode<T> child = node.getLeft();
 			setChild(parent, child, parentNodeEdge);
 		}
 		
 		return returnValue;
+	}
+
+	@Override
+	public int getHeight() {
+		return 0;
 	}
 	
 }

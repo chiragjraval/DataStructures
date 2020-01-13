@@ -7,23 +7,23 @@ import java.util.Optional;
 
 import com.chirag.ds.util.ListUtil;
 
-public class BinaryTree<T> extends AbstractTree<T> {
+public class BinaryBasicTree<T> extends AbstractBinaryTree<T> {
 
-	public BinaryTree() {
+	public BinaryBasicTree() {
 		super();
 	}
 	
 	@Override
 	public Optional<T> insert(T value) {
-		TreeNode<T> newNode = new TreeNode<T>(value);
-		TreeNode<T> parent = null;
+		BinaryTreeNode<T> newNode = new BinaryTreeNode<T>(value);
+		BinaryTreeNode<T> parent = null;
 		EdgeType parentNodeEdge = null;
 		
 		boolean parentFound = false;
-		List<TreeNode<T>> nodeList = ListUtil.getNonNullList(this.root); 
+		List<BinaryTreeNode<T>> nodeList = ListUtil.getNonNullList(this.root); 
 		while (!parentFound && !nodeList.isEmpty()) {
-			List<TreeNode<T>> nextLevelNodeList = new ArrayList<>();
-			for (TreeNode<T> node : nodeList) {
+			List<BinaryTreeNode<T>> nextLevelNodeList = new ArrayList<>();
+			for (BinaryTreeNode<T> node : nodeList) {
 				if(Objects.isNull(node.getLeft())) {
 					parent = node;
 					parentNodeEdge = EdgeType.LEFT;
@@ -53,12 +53,12 @@ public class BinaryTree<T> extends AbstractTree<T> {
 
 	@Override
 	public Optional<T> delete(T value) {
-		Optional<TreeNode<T>> nodeOptional = findNode(value);
+		Optional<BinaryTreeNode<T>> nodeOptional = findNode(value);
 		if(nodeOptional.isPresent()) {
-			TreeNode<T> node = nodeOptional.get();
-			Optional<TreeNode<T>> leafOptional = findAnyLeafNode(node);
+			BinaryTreeNode<T> node = nodeOptional.get();
+			Optional<BinaryTreeNode<T>> leafOptional = findAnyLeafNode(node);
 			if(leafOptional.isPresent()) {
-				TreeNode<T> leaf = leafOptional.get();
+				BinaryTreeNode<T> leaf = leafOptional.get();
 				node.setData(leaf.getData());
 				setEdgeNull(leaf.getParent(), leaf.getParentNodeEdge());
 				leaf.free();
@@ -69,6 +69,11 @@ public class BinaryTree<T> extends AbstractTree<T> {
 			return Optional.of(value);
 		}
 		return Optional.empty();
+	}
+
+	@Override
+	public int getHeight() {
+		return 0;
 	}
 
 }
