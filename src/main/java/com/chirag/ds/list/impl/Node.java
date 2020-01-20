@@ -1,5 +1,6 @@
 package com.chirag.ds.list.impl;
 
+import com.chirag.ds.model.AbstractBaseNode;
 import com.chirag.ds.model.BaseNode;
 
 /**
@@ -7,7 +8,7 @@ import com.chirag.ds.model.BaseNode;
  * @param <T> Type of object contained by Node
  * @author Chirag 
  */
-class Node<T> extends BaseNode<T> {
+class Node<T> extends AbstractBaseNode<T> implements BaseNode<T> {
 
 	private Node<T> next;
 	

@@ -1,8 +1,9 @@
 package com.chirag.ds.tree.impl;
 
+import com.chirag.ds.model.AbstractBaseNode;
 import com.chirag.ds.model.BaseNode;
 
-public class TreeNode<T> extends BaseNode<T> {
+public class TreeNode<T> extends AbstractBaseNode<T> implements BaseNode<T> {
 
 	protected BinaryTreeNode<T> parent = null;
 	protected EdgeType parentNodeEdge;
